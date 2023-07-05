@@ -1,5 +1,7 @@
 package org.globex.retail.store.order.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.Instant;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class OrderDto {
 
     private String status;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING)
     private Instant timestamp;
 
     private ShippingAddressDto shippingAddress;

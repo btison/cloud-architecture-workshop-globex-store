@@ -15,6 +15,8 @@
     <quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+    <apicurio.version>2.4.2.Final</apicurio.version>
+    <jackson.version>2.14.2</jackson.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -49,8 +51,32 @@
       <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.fasterxml.jackson.datatype</groupId>
+      <artifactId>jackson-datatype-jsr310</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-avro</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.apicurio</groupId>
+      <artifactId>apicurio-registry-schema-resolver</artifactId>
+      <version>${apicurio.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.apicurio</groupId>
+      <artifactId>apicurio-registry-serdes-avro-serde</artifactId>
+      <version>${apicurio.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.apicurio</groupId>
+      <artifactId>apicurio-registry-client</artifactId>
+      <version>${apicurio.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
