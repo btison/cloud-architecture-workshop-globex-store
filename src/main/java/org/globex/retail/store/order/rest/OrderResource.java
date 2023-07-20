@@ -40,4 +40,26 @@ public class OrderResource {
                 });
     }
 
+    @POST
+    @Path("/update")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> updateOrder(OrderDto order) {
+        if (order == null) {
+            return Uni.createFrom().item(Response.status(Response.Status.BAD_REQUEST).build());
+        }
+        return Uni.createFrom().item(() -> order).emitOn(Infrastructure.getDefaultWorkerPool())
+                .onItem().transform(o -> orderService.updateOrder(o))
+                .onItem().transform(orderDto -> {
+                    if (orderDto == null) {
+                        return Response.status(Response.Status.NOT_FOUND).build();
+                    }
+                    return Response.ok().build();
+                })
+                .onFailure().recoverWithItem(throwable -> {
+                    LOGGER.error("Exception while updating order", throwable);
+                    return Response.serverError().build();
+                });
+    }
+
 }

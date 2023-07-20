@@ -19,4 +19,14 @@ public class OrderService {
         return OrderMapper.toDto(order);
     }
 
+    @Transactional
+    public OrderDto updateOrder(OrderDto orderDto) {
+        Order order = Order.findById(orderDto.getId());
+        if (order == null) {
+            return null;
+        }
+        OrderMapper.updateEntity(order, orderDto);
+        return OrderMapper.toDto(order);
+    }
+
 }

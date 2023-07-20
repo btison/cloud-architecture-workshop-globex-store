@@ -72,4 +72,10 @@ public class OrderMapper {
                 .build();
     }
 
+    public static void updateEntity(Order order, OrderDto orderDto) {
+        if (orderDto.getStatus() != null) {
+            order.status = orderDto.getStatus();
+        }
+    }
+
 }
