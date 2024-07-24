@@ -29,4 +29,13 @@ public class OrderService {
         return OrderMapper.toDto(order);
     }
 
+    @Transactional
+    public OrderDto getOrderByCustomerIdAndOrderId(String customerId, String OrderId) {
+        Order order = Order.findByCustomerIdAndOrderId(customerId, OrderId);
+        if (order == null) {
+            return null;
+        }
+        return OrderMapper.toDto(order);
+    }
+
 }
