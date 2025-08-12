@@ -1,8 +1,9 @@
 package org.globex.retail.store.order.model.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity(name = "OrderLineItem")
 @Table(name = "line_item")
@@ -21,7 +22,7 @@ public class OrderLineItem extends PanacheEntityBase {
     public int quantity;
 
     @Column(name = "price", precision = 8, scale = 2, columnDefinition = "NUMERIC (8, 2)")
-    public double price;
+    public BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     public Order order;

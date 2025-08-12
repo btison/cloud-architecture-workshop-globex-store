@@ -1,9 +1,10 @@
 package org.globex.retail.store.order.model.entity;
 
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 
-import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.time.Instant;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -29,12 +30,12 @@ public class OrderTest {
         order.timestamp = Instant.parse("2023-01-31T09:00:00.0Z");
         OrderLineItem item1 = new OrderLineItem();
         item1.product = "product1";
-        item1.price = 8.99;
+        item1.price = new BigDecimal("8.99");
         item1.quantity = 1;
         order.addItem(item1);
         OrderLineItem item2 = new OrderLineItem();
         item2.product = "product2";
-        item2.price = 18.99;
+        item2.price = new BigDecimal("18.99");
         item2.quantity = 2;
         order.addItem(item2);
         ShippingAddress shippingAddress = new ShippingAddress();

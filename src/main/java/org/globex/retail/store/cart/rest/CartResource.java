@@ -1,15 +1,15 @@
 package org.globex.retail.store.cart.rest;
 
 import io.smallrye.mutiny.Uni;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.globex.retail.store.cart.model.CartItem;
 import org.globex.retail.store.cart.service.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/services/cart")
 public class CartResource {

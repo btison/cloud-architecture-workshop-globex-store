@@ -1,13 +1,14 @@
 package org.globex.retail.store.order.service;
 
 import io.quarkus.test.junit.QuarkusTest;
+import jakarta.inject.Inject;
 import org.globex.retail.store.order.model.dto.LineItemDto;
 import org.globex.retail.store.order.model.dto.OrderDto;
 import org.globex.retail.store.order.model.dto.ShippingAddressDto;
 import org.globex.retail.store.order.model.entity.Order;
 import org.junit.jupiter.api.Test;
 
-import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -48,12 +49,12 @@ public class OrderServiceTest {
                         .build())
                 .withOrderLineItems(List.of(LineItemDto.builder()
                                 .withProduct("product1")
-                                .withPrice(8.99)
+                                .withPrice(new BigDecimal("8.99"))
                                 .withQuantity(1)
                                 .build(),
                         LineItemDto.builder()
                                 .withProduct("product2")
-                                .withPrice(18.99)
+                                .withPrice(new BigDecimal("18.99"))
                                 .withQuantity(2)
                                 .build()))
                 .build();

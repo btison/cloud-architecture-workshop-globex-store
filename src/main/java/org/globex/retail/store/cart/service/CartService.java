@@ -1,11 +1,10 @@
 package org.globex.retail.store.cart.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.globex.retail.store.cart.model.Cart;
 import org.globex.retail.store.cart.model.CartItem;
 import org.globex.retail.store.cart.store.CartStore;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 
 @ApplicationScoped
 public class CartService {

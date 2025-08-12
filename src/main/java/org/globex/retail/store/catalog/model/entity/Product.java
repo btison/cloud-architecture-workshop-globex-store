@@ -3,8 +3,8 @@ package org.globex.retail.store.catalog.model.entity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Parameters;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +37,7 @@ public class Product extends PanacheEntityBase {
     @JoinTable(name = "catalog_tag",
             joinColumns = { @JoinColumn(name = "item_id") },
             inverseJoinColumns = { @JoinColumn(name = "tag_id") })
-    public Set<Tag> tags = new HashSet<Tag>();
+    public Set<Tag> tags = new HashSet<>();
 
     @Column(name = "price")
     public Double price;

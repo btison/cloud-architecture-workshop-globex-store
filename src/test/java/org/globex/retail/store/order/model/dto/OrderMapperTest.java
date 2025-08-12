@@ -5,6 +5,7 @@ import org.globex.retail.store.order.model.entity.OrderLineItem;
 import org.globex.retail.store.order.model.entity.ShippingAddress;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class OrderMapperTest {
         assertThat(shippingAddressDto.getState(), is(order.shippingAddress.state));
         assertThat(shippingAddressDto.getCountry(), is(order.shippingAddress.country));
         assertThat(orderDto.getLineItems().size(), equalTo(2));
-        LineItemDto lineItemDto = orderDto.getLineItems().get(0);
+        LineItemDto lineItemDto = orderDto.getLineItems().getFirst();
         OrderLineItem orderLineItem = order.orderLineItems.stream().filter(oli -> oli.product.equals(lineItemDto.getProduct())).findFirst().orElse(null);
         assertThat(orderLineItem, notNullValue());
         assertThat(lineItemDto.getPrice(), is(orderLineItem.price));
@@ -57,7 +58,7 @@ public class OrderMapperTest {
         assertThat(o.shippingAddress.country, is(od.getShippingAddress().getCountry()));
         assertThat(o.orderLineItems, notNullValue());
         assertThat(o.orderLineItems.size(), is(2));
-        OrderLineItem orderLineItem = o.orderLineItems.get(0);
+        OrderLineItem orderLineItem = o.orderLineItems.getFirst();
         LineItemDto lineItemDto = od.getLineItems().stream().filter(li -> orderLineItem.product.equals(li.getProduct())).findFirst().orElse(null);
         assertThat(lineItemDto, notNullValue());
         assertThat(orderLineItem.price, is(lineItemDto.getPrice()));
@@ -72,13 +73,13 @@ public class OrderMapperTest {
         OrderLineItem item1 = new OrderLineItem();
         item1.id = 1;
         item1.product = "product1";
-        item1.price = 8.99;
+        item1.price = new BigDecimal("8.99");
         item1.quantity = 1;
         order.addItem(item1);
         OrderLineItem item2 = new OrderLineItem();
         item2.id = 2;
         item2.product = "product2";
-        item2.price = 18.99;
+        item2.price = new BigDecimal("18.99");
         item2.quantity = 2;
         order.addItem(item2);
         ShippingAddress shippingAddress = new ShippingAddress();
@@ -111,12 +112,12 @@ public class OrderMapperTest {
                         .build())
                 .withOrderLineItems(List.of(LineItemDto.builder()
                                 .withProduct("product1")
-                                .withPrice(8.99)
+                                .withPrice(new BigDecimal("8.99"))
                                 .withQuantity(1)
                                 .build(),
                         LineItemDto.builder()
                                 .withProduct("product2")
-                                .withPrice(18.99)
+                                .withPrice(new BigDecimal("18.99"))
                                 .withQuantity(2)
                                 .build()))
                 .build();

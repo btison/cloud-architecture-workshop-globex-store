@@ -1,10 +1,10 @@
 package org.globex.retail.store.inventory.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.globex.retail.store.inventory.model.dto.InventoryDto;
 import org.globex.retail.store.inventory.model.dto.InventoryMapper;
 import org.globex.retail.store.inventory.model.entity.Inventory;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
 import java.util.stream.Collectors;
 

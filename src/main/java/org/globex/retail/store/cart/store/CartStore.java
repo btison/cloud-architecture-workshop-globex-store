@@ -1,8 +1,8 @@
 package org.globex.retail.store.cart.store;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import org.globex.retail.store.cart.model.Cart;
 
-import javax.enterprise.context.ApplicationScoped;
 import java.util.HashMap;
 import java.util.Map;
 

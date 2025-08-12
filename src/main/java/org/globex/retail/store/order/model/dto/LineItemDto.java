@@ -1,12 +1,14 @@
 package org.globex.retail.store.order.model.dto;
 
+import java.math.BigDecimal;
+
 public class LineItemDto {
 
     private String product;
 
     private int quantity;
 
-    private double price;
+    private BigDecimal price;
 
     public String getProduct() {
         return product;
@@ -16,7 +18,7 @@ public class LineItemDto {
         return quantity;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -41,7 +43,7 @@ public class LineItemDto {
             return this;
         }
 
-        public Builder withPrice(Double price) {
+        public Builder withPrice(BigDecimal price) {
             lineItemDto.price = price;
             return this;
         }

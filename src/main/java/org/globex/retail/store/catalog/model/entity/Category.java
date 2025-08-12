@@ -1,8 +1,8 @@
 package org.globex.retail.store.catalog.model.entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 
 @Entity(name = "Category")
 @Table(name = "category")

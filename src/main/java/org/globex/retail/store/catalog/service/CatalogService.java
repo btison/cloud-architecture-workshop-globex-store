@@ -1,5 +1,7 @@
 package org.globex.retail.store.catalog.service;
 
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import org.globex.retail.store.catalog.model.dto.PagedProductList;
 import org.globex.retail.store.catalog.model.dto.ProductDto;
 import org.globex.retail.store.catalog.model.dto.ProductMapper;
@@ -8,8 +10,6 @@ import org.globex.retail.store.inventory.model.dto.InventoryDto;
 import org.globex.retail.store.inventory.service.InventoryService;
 import org.globex.retail.store.catalog.model.entity.Category;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
