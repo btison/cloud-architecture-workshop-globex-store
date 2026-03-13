@@ -14,4 +14,9 @@ public class CustomerService {
         return CustomerMapper.toDto(Customer.findByUserId(userId));
     }
 
+    @Transactional
+    public CustomerDto getCustomerByEmail(String email) {
+        return CustomerMapper.toDto(Customer.findByEmail(email));
+    }
+
 }

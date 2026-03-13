@@ -40,4 +40,23 @@ public class CustomerResource {
                 });
     }
 
+    @GET
+    @Path("/customer/email/{email}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> getCustomerByUserEmail(@PathParam("email") String email) {
+        return Uni.createFrom().item(() -> email).emitOn(Infrastructure.getDefaultWorkerPool())
+                .onItem().transform(u -> customerService.getCustomerByEmail(u))
+                .onItem().transform(customerDto -> {
+                    if (customerDto == null) {
+                        return Response.status(Response.Status.NOT_FOUND).build();
+                    } else {
+                        return Response.ok(customerDto).build();
+                    }
+                })
+                .onFailure().recoverWithItem(throwable -> {
+                    LOGGER.error("Exception while fetching customer", throwable);
+                    return Response.serverError().build();
+                });
+    }
+
 }
