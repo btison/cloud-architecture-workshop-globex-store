@@ -4,10 +4,7 @@ import io.smallrye.mutiny.Uni;
 import io.smallrye.mutiny.infrastructure.Infrastructure;
 import io.vertx.core.json.JsonObject;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.globex.retail.store.order.model.dto.OrderDto;
@@ -39,4 +36,35 @@ public class OrderResource {
                 });
     }
 
+    @GET
+    @Path("/{customerId}/{orderId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> getOrderByCustomerIdAndOrderId(@PathParam("customerId") String customerId, @PathParam("orderId") String orderId) {
+        return Uni.createFrom().item(() -> null).emitOn(Infrastructure.getDefaultWorkerPool())
+                .onItem().transform(n -> orderService.getOrderByCustomerIdAndOrderId(customerId, orderId))
+                .onItem().transform(orderDto -> {
+                    if (orderDto == null) {
+                        return Response.status(Response.Status.NOT_FOUND).build();
+                    } else {
+                        return Response.ok(orderDto).build();
+                    }
+                })
+                .onFailure().recoverWithItem(throwable -> {
+                    LOGGER.error("Exception while fetching order by customerId and orderId", throwable);
+                    return Response.serverError().build();
+                });
+    }
+
+    @GET
+    @Path("/{customerId}/orders")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uni<Response> getOrdersByCustomerId(@PathParam("customerId") String customerId) {
+        return Uni.createFrom().item(() -> null).emitOn(Infrastructure.getDefaultWorkerPool())
+                .onItem().transform(n -> orderService.getOrderByCustomerId(customerId))
+                .onItem().transform(orders -> Response.ok(orders).build())
+                .onFailure().recoverWithItem(throwable -> {
+                    LOGGER.error("Exception while fetching order by customerId and orderId", throwable);
+                    return Response.serverError().build();
+                });
+    }
 }
